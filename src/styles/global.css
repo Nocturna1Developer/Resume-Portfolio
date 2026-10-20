@@ -1,0 +1,254 @@
+@import '@fontsource-variable/inter/index.css';
+@import '@fontsource/instrument-serif/latin-400.css';
+
+:root {
+  /* color */
+  --paper: #f6f4ef;
+  --surface: #fffefb;
+  --ink: #15171c;
+  --ink-2: #4b505a;
+  --ink-3: #6b707a;
+  --line: #e1dcd1;
+  --line-strong: #c9c2b4;
+  --accent: #9a3a12;
+  --accent-ink: #7a2c0c;
+  --accent-wash: #f3e6dc;
+  --focus: #1d4ed8;
+
+  /* type */
+  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-serif: 'Instrument Serif', 'Iowan Old Style', Georgia, serif;
+  --step--1: 0.8125rem;
+  --step-0: 1rem;
+  --step-1: 1.125rem;
+  --step-2: 1.375rem;
+  --step-3: clamp(1.75rem, 1.3rem + 1.6vw, 2.375rem);
+  --step-4: clamp(2.25rem, 1.5rem + 3vw, 3.75rem);
+
+  /* space */
+  --s-1: 0.25rem;
+  --s-2: 0.5rem;
+  --s-3: 0.75rem;
+  --s-4: 1rem;
+  --s-5: 1.5rem;
+  --s-6: 2rem;
+  --s-7: 3rem;
+  --s-8: 4.5rem;
+  --s-9: 6rem;
+
+  --gutter: clamp(1rem, 4vw, 2.5rem);
+  --max: 72rem;
+  --header-h: 3.75rem;
+  --radius: 6px;
+
+  /* motion */
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --dur: 180ms;
+
+  color-scheme: light;
+}
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-padding-top: calc(var(--header-h) + var(--s-4));
+}
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: var(--step-0);
+  line-height: 1.6;
+  font-feature-settings: 'ss01', 'cv11';
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+img, video, iframe { display: block; max-width: 100%; height: auto; }
+h1, h2, h3, h4, p, ul, ol, dl, dd, figure { margin: 0; }
+ul[role='list'] { list-style: none; padding: 0; }
+
+a { color: inherit; text-underline-offset: 0.2em; text-decoration-thickness: 1px; }
+a:hover { color: var(--accent-ink); }
+
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+strong { font-weight: 620; }
+
+.wrap {
+  width: 100%;
+  max-width: calc(var(--max) + 2 * var(--gutter));
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  overflow: hidden; clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.skip-link {
+  position: absolute;
+  left: var(--s-4);
+  top: -100px;
+  z-index: 100;
+  background: var(--ink);
+  color: var(--paper);
+  padding: var(--s-3) var(--s-4);
+  border-radius: var(--radius);
+}
+.skip-link:focus { top: var(--s-3); color: var(--paper); }
+
+/* buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-2);
+  min-height: 44px;
+  padding: 0 var(--s-5);
+  border-radius: 999px;
+  border: 1px solid var(--ink);
+  font-size: 0.9375rem;
+  font-weight: 560;
+  text-decoration: none;
+  transition: background var(--dur) var(--ease), color var(--dur) var(--ease), border-color var(--dur) var(--ease);
+}
+.btn--solid { background: var(--ink); color: var(--paper); }
+.btn--solid:hover { background: var(--accent-ink); border-color: var(--accent-ink); color: #fff; }
+.btn--ghost { background: transparent; color: var(--ink); }
+.btn--ghost:hover { background: var(--ink); color: var(--paper); }
+.btn svg { width: 1em; height: 1em; flex: none; }
+
+/* section scaffolding */
+.section { padding-block: var(--s-8); border-top: 1px solid var(--line); }
+.section__head {
+  display: grid;
+  gap: var(--s-2);
+  margin-bottom: var(--s-6);
+}
+.eyebrow {
+  font-size: var(--step--1);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.section__title {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: var(--step-3);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+.section__lede { color: var(--ink-2); max-width: 40rem; }
+
+.text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+  min-height: 44px;
+  font-weight: 560;
+  font-size: 0.9375rem;
+  text-decoration: underline;
+  text-decoration-color: var(--line-strong);
+}
+.text-link:hover { text-decoration-color: currentColor; }
+.text-link svg { width: 0.85em; height: 0.85em; }
+
+.tags { display: flex; flex-wrap: wrap; gap: var(--s-1) var(--s-3); padding: 0; list-style: none; font-size: var(--step--1); color: var(--ink-3); }
+.tags li + li::before { content: '·'; margin-right: var(--s-3); color: var(--line-strong); }
+
+/* disclosure */
+details.disclosure { border-top: 1px solid var(--line); }
+details.disclosure > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-4);
+  min-height: 48px;
+  cursor: pointer;
+  list-style: none;
+  font-weight: 560;
+  font-size: 0.9375rem;
+}
+details.disclosure > summary::-webkit-details-marker { display: none; }
+details.disclosure > summary::after {
+  content: '';
+  width: 0.55rem; height: 0.55rem;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: translateY(-25%) rotate(45deg);
+  transition: transform var(--dur) var(--ease);
+  flex: none;
+}
+details.disclosure[open] > summary::after { transform: translateY(15%) rotate(-135deg); }
+details.disclosure > summary:hover { color: var(--accent-ink); }
+.disclosure__body { padding-bottom: var(--s-5); display: grid; gap: var(--s-4); color: var(--ink-2); font-size: 0.9375rem; }
+.disclosure__body h4 { font-size: var(--step--1); text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink); margin-bottom: var(--s-1); }
+.disclosure__body ul { padding-left: 1.1rem; display: grid; gap: var(--s-1); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+}
+
+/* ---------- motion ----------
+   Content is always visible without JS. With JS and no reduced-motion preference,
+   elements tagged [data-reveal] rise in once as they enter the viewport. */
+:root {
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-reveal: 900ms;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .js [data-reveal] {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0);
+    transition: opacity var(--dur-reveal) var(--ease-out), transform var(--dur-reveal) var(--ease-out);
+    transition-delay: calc(var(--i, 0) * 70ms);
+  }
+  .js [data-reveal].is-in { opacity: 1; transform: none; }
+
+  .js [data-reveal='group'] { opacity: 1; transform: none; }
+  .js [data-reveal='group'] .project__media { clip-path: inset(0 0 100% 0 round var(--radius)); transition: clip-path 1100ms var(--ease-out); }
+  .js [data-reveal='group'].is-in .project__media { clip-path: inset(0 0 0 0 round var(--radius)); }
+
+  .js [data-reveal='rule'] { opacity: 1; transform: scaleX(0); transform-origin: left; transition: transform 1200ms var(--ease-out); }
+  .js [data-reveal='rule'].is-in { transform: none; }
+
+  /* hero entrance: short, staggered, starts immediately */
+  .js .hero [data-enter] { animation: enter 900ms var(--ease-out) both; animation-delay: calc(var(--i, 0) * 90ms + 60ms); }
+  @keyframes enter { from { opacity: 0; transform: translate3d(0, 14px, 0); } to { opacity: 1; transform: none; } }
+}
+
+/* animated underline for text links */
+.text-link {
+  text-decoration: none;
+  background-image: linear-gradient(currentColor, currentColor), linear-gradient(var(--line-strong), var(--line-strong));
+  background-size: 0% 1px, 100% 1px;
+  background-position: 0 calc(50% + 0.75em), 0 calc(50% + 0.75em);
+  background-repeat: no-repeat;
+  transition: background-size 420ms var(--ease-out), color var(--dur) var(--ease);
+}
+.text-link:hover, .text-link:focus-visible { background-size: 100% 1px, 100% 1px; }
+.text-link svg { transition: transform 320ms var(--ease-out); }
+.text-link:hover svg { transform: translate(2px, -2px); }
+
+.btn { transition: background var(--dur) var(--ease), color var(--dur) var(--ease), border-color var(--dur) var(--ease), transform 320ms var(--ease-out), box-shadow 320ms var(--ease-out); }
+.btn:hover { transform: translateY(-1px); box-shadow: 0 8px 20px -10px rgba(21, 23, 28, 0.45); }
+.btn:active { transform: translateY(0); box-shadow: none; }
+.btn svg { transition: transform 320ms var(--ease-out); }
+.btn:hover svg { transform: translateX(2px); }

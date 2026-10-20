@@ -1,0 +1,125 @@
+---
+import { Picture } from 'astro:assets';
+import type { Project } from '../data/content';
+import VideoEmbed from './VideoEmbed.astro';
+import Icon from './Icon.astro';
+
+interface Props { project: Project; feature?: boolean; index: number }
+const { project: p, feature = false, index } = Astro.props;
+const headingId = `project-${p.slug}`;
+const iconFor = { source: 'code', live: 'external', video: 'play', play: 'external' } as const;
+const links = [...p.links];
+if (p.video) links.push({ label: 'Watch on YouTube', href: `https://www.youtube.com/watch?v=${p.video.id}`, kind: 'video' });
+---
+<article class:list={['project', { 'project--feature': feature }]} aria-labelledby={headingId} data-reveal="group">
+  <div class="project__media">
+    {p.video ? (
+      <VideoEmbed id={p.video.id} title={p.video.title} poster={feature ? p.video.poster : p.image} alt={p.imageAlt} eager={feature} sizes={feature ? '(min-width: 64rem) 40rem, 100vw' : '(min-width: 64rem) 34rem, 100vw'} />
+    ) : (
+      <Picture
+        src={p.image}
+        alt={p.imageAlt}
+        widths={[480, 720, 960]}
+        sizes="(min-width: 64rem) 34rem, 100vw"
+        formats={['avif', 'webp']}
+        loading={index === 0 ? 'eager' : 'lazy'}
+        class="project__img"
+      />
+    )}
+  </div>
+
+  <div class="project__body" data-reveal style="--i:1">
+    <p class="project__meta">
+      <span class="project__num" aria-hidden="true">0{index + 1}</span>
+      <span>{p.context}</span>
+      {p.year && <span>{p.year}</span>}
+      <span class="project__status">{p.status}</span>
+    </p>
+    <h3 id={headingId} class="project__title">{p.name}</h3>
+    <p class="project__purpose">{p.purpose}</p>
+
+    <dl class="project__facts">
+      <div>
+        <dt>My role</dt>
+        <dd>{p.role}</dd>
+      </div>
+      <div>
+        <dt>Outcome</dt>
+        <dd><strong>{p.outcome}</strong>{p.outcomeNote && <span class="project__note"> {p.outcomeNote}</span>}</dd>
+      </div>
+    </dl>
+
+    <ul class="tags" aria-label="Technologies">
+      {p.tech.map((t) => <li>{t}</li>)}
+    </ul>
+
+    <ul class="project__links" role="list">
+      {links.map((l) => (
+        <li>
+          <a class="text-link" href={l.href} target="_blank" rel="noopener">
+            <Icon name={iconFor[l.kind]} />{l.label}<span class="visually-hidden">: {p.name} (opens in a new tab)</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    {p.details && (
+      <details class="disclosure project__details">
+        <summary>Project details<span class="visually-hidden">: {p.name}</span></summary>
+        <div class="disclosure__body">
+          {p.details.map((d) => (
+            <div>
+              <h4>{d.heading}</h4>
+              {d.body && <p>{d.body}</p>}
+              {d.list && <ul>{d.list.map((i) => <li>{i}</li>)}</ul>}
+            </div>
+          ))}
+          {p.gallery && (
+            <div class="project__gallery">
+              {p.gallery.map((g) => (
+                <Picture src={g.src} alt={g.alt} widths={[400, 700]} sizes="(min-width: 64rem) 20rem, 50vw" formats={['avif', 'webp']} loading="lazy" />
+              ))}
+            </div>
+          )}
+        </div>
+      </details>
+    )}
+  </div>
+</article>
+
+<style>
+  .project__media { overflow: hidden; border-radius: var(--radius); }
+  .project__media :global(picture img) { transition: transform 1200ms var(--ease-out); }
+  .project:hover .project__media :global(picture img) { transform: scale(1.025); }
+  .project { display: grid; gap: var(--s-5); align-content: start; }
+  .project__media :global(img) { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; object-position: top left; border-radius: var(--radius); background: #ddd; }
+  .project__meta {
+    display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--s-1) var(--s-3);
+    font-size: var(--step--1); color: var(--ink-3);
+  }
+  .project__num { font-variant-numeric: tabular-nums; color: var(--accent); font-weight: 600; }
+  .project__status {
+    padding: 0 var(--s-2); border: 1px solid var(--line-strong); border-radius: 999px;
+    font-size: 0.75rem; color: var(--ink-2); line-height: 1.6;
+  }
+  .project__title {
+    font-family: var(--font-serif); font-weight: 400;
+    font-size: var(--step-3); line-height: 1.05; margin-top: var(--s-2); letter-spacing: -0.01em;
+  }
+  .project__purpose { font-size: var(--step-1); line-height: 1.5; color: var(--ink); margin-top: var(--s-3); max-width: 38rem; }
+  .project__body { display: grid; gap: var(--s-4); align-content: start; }
+  .project__body > .project__title, .project__body > .project__purpose, .project__body > .project__meta { margin: 0; }
+  .project__body > .project__meta + .project__title { margin-top: calc(-1 * var(--s-2)); }
+  .project__facts { display: grid; gap: var(--s-3); font-size: 0.9375rem; color: var(--ink-2); }
+  .project__facts dt { font-size: var(--step--1); font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink); }
+  .project__facts strong { color: var(--ink); font-weight: 600; }
+  .project__note { color: var(--ink-3); font-size: var(--step--1); }
+  .project__links { display: flex; flex-wrap: wrap; gap: 0 var(--s-5); margin: 0; }
+  .project__gallery { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-3); }
+  .project__gallery :global(img) { border-radius: var(--radius); aspect-ratio: 3 / 2; object-fit: cover; }
+
+  @media (min-width: 64rem) {
+    .project--feature { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: var(--s-7); }
+    .project--feature .project__title { font-size: var(--step-4); }
+  }
+</style>

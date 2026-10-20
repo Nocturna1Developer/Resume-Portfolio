@@ -1,0 +1,94 @@
+---
+import '../styles/global.css';
+import { person } from '../data/content';
+
+interface Props {
+  title: string;
+  description: string;
+  noindex?: boolean;
+}
+const { title, description, noindex = false } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const ogImage = new URL(`${base}og.png`, Astro.site).href;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: person.name,
+  url: new URL(base, Astro.site).href,
+  jobTitle: 'Software Engineer',
+  alumniOf: [{ '@type': 'CollegeOrUniversity', name: 'San José State University' }],
+  sameAs: [person.links.github, person.links.linkedin, person.links.youtube],
+};
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <script is:inline>if ('IntersectionObserver' in window) document.documentElement.classList.add('js');</script>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content={person.name} />
+    {noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={canonical} />}
+    <meta name="theme-color" content="#f6f4ef" />
+    <link rel="icon" href={`${base}favicon.svg`} type="image/svg+xml" />
+    <link rel="icon" href={`${base}favicon-32.png`} sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href={`${base}apple-touch-icon.png`} />
+    <link rel="sitemap" href={`${base}sitemap-index.xml`} />
+
+    <meta property="og:type" content="profile" />
+    <meta property="og:site_name" content={person.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={`${person.name} — Software engineer`} />
+    <meta property="profile:first_name" content="Chinamay" />
+    <meta property="profile:last_name" content="Kasareddy" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    {!noindex && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+  </head>
+  <body>
+    <slot />
+    <script>
+      // Reveal-on-scroll, header state and active-section highlighting.
+      const reveal = document.querySelectorAll<HTMLElement>('[data-reveal]');
+      const io = new IntersectionObserver(
+        (entries) => entries.forEach((e) => {
+          if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
+        }),
+        { rootMargin: '0px 0px -8% 0px', threshold: 0.08 },
+      );
+      reveal.forEach((el) => io.observe(el));
+      // Safety net: never leave content hidden (e.g. printing, anchor jumps far down).
+      window.addEventListener('beforeprint', () => reveal.forEach((el) => el.classList.add('is-in')));
+
+      const header = document.querySelector('.site-header');
+      const onScroll = () => header?.classList.toggle('is-scrolled', window.scrollY > 8);
+      onScroll();
+      window.addEventListener('scroll', onScroll, { passive: true });
+
+      const links = new Map<string, HTMLAnchorElement>();
+      document.querySelectorAll<HTMLAnchorElement>('.nav a[href^="#"]').forEach((a) => links.set(a.hash.slice(1), a));
+      const spy = new IntersectionObserver(
+        (entries) => entries.forEach((e) => {
+          const link = links.get(e.target.id);
+          if (!link) return;
+          if (e.isIntersecting) {
+            links.forEach((l) => l.removeAttribute('aria-current'));
+            link.setAttribute('aria-current', 'true');
+          }
+        }),
+        { rootMargin: '-45% 0px -50% 0px' },
+      );
+      links.forEach((_, id) => { const s = document.getElementById(id); if (s) spy.observe(s); });
+    </script>
+  </body>
+</html>
