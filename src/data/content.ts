@@ -10,8 +10,13 @@ import hyperion from '../assets/projects/hyperion.jpg';
 import hyperionPoster from '../assets/projects/yt-PGCNf-_DkNI.jpg';
 import lane from '../assets/projects/lane.jpg';
 import slime from '../assets/projects/yt-r5-DEYGfWAA.jpg';
-import disappearance from '../assets/projects/yt-OprsYiEykEE.jpg';
 import formulate from '../assets/projects/formulate.jpg';
+import disappearance from '../assets/projects/yt-OprsYiEykEE.jpg';
+import ishgar from '../assets/projects/yt-kP7kunFiuAQ.jpg';
+import lostLegacy from '../assets/projects/yt--L7wtfTd2Qw.jpg';
+import tankWar from '../assets/projects/yt-uCK1EcNBCS4.jpg';
+import gustify from '../assets/projects/yt-_mPmjLOjb8U.jpg';
+import simplereads from '../assets/projects/yt-vemYlcEi_vE.jpg';
 
 export const person = {
   name: 'Chinamay Kasareddy',
@@ -26,7 +31,7 @@ export const person = {
 export const hero = {
   headline: 'I turn complex problems into working software, and help teams ship it.',
   intro:
-    'I’m a software engineer with a background in applied mathematics. Since 2020 I’ve built multiplayer training simulations, led small teams to launch, and taught full-stack development to students in three countries.',
+    'I’m a software engineer with a background in applied mathematics. Since 2018 I’ve built multiplayer training simulations, led small teams to launch, and taught full-stack development to students in three countries.',
   proof: [
     { label: 'Now', value: 'Simulation Architect, ACSILabs' },
     { label: 'Leadership', value: 'Led teams of 6–7 developers to MVP' },
@@ -66,7 +71,7 @@ export const projects: Project[] = [
     purpose:
       'A story-driven, first-person survival shooter set in an abandoned city, built and released publicly on itch.io in about two months.',
     role:
-      'Solo developer under my side studio, Dusk Games Interactive. I designed the game and wrote the gameplay code in C#, structured around actions, delegates and events so systems stayed decoupled and the build could finish on schedule. Environment art and audio are free Unity Asset Store packs.',
+      'Solo developer under my side studio, Dusk Games Interactive. I wrote the C# gameplay systems, including an objective system, finite-state enemy AI with patrol and attack behavior, and weapon handling. They’re decoupled with actions, delegates and events so the build could finish on schedule. I also designed the city and forest levels using free Unity Asset Store art.',
     outcome: '17,000+ views, 1,500+ downloads and a 4.8 / 5 average rating across 580 reviews.',
     outcomeNote: 'Self-reported figures from the itch.io release.',
     image: evCover,
@@ -85,6 +90,15 @@ export const projects: Project[] = [
       {
         heading: 'Constraints',
         body: 'Built in roughly two months (February–March 2021) using only free third-party assets, so the engineering effort went into gameplay systems, pacing and polish rather than content creation.',
+      },
+      {
+        heading: 'Systems I programmed',
+        list: [
+          'Objective system that drives the story through notes and goals',
+          'Finite-state enemy AI with patrol paths and an attack state',
+          'Weapon feel: leaning, weapon sway, bullet spread, recoil and reload animations',
+          'Level and lighting design for an abandoned city and forest, with post-processing for atmosphere',
+        ],
       },
     ],
     gallery: [
@@ -175,16 +189,14 @@ export const moreWork = [
     ],
   },
   {
-    name: 'The Disappearance',
-    video: { id: 'OprsYiEykEE', title: 'The Disappearance — full gameplay' },
-    context: 'Released first-person horror game · Unity, C#',
-    summary: 'An atmospheric, story-driven horror game with lantern lighting and an enemy that hunts the player through a deserted town.',
-    image: disappearance,
-    imageAlt: 'Title frame from The Disappearance gameplay video.',
+    name: 'SimpleReads',
+    video: { id: 'vemYlcEi_vE', title: 'SimpleReads — Flutter app walkthrough' },
+    context: 'Android book-tracking app · Flutter, Dart, Firebase',
+    summary: 'A Goodreads-style app with Firebase email sign-in and a Firestore-backed library where you add, edit, view and delete books.',
+    image: simplereads,
+    imageAlt: 'Title frame from the SimpleReads app walkthrough.',
     links: [
-      { label: 'Play', href: 'https://nocturna1.itch.io/the-dissapearance' },
-      { label: 'Video', href: 'https://www.youtube.com/watch?v=OprsYiEykEE' },
-      { label: 'Source', href: 'https://github.com/Nocturna1Developer/Unity3D-Dissapearance' },
+      { label: 'Source', href: 'https://github.com/Nocturna1Developer/SimpleReads-Flutter-Application' },
     ],
   },
   {
@@ -197,6 +209,109 @@ export const moreWork = [
     links: [
       { label: 'Video', href: 'https://www.youtube.com/watch?v=m9VQWD5IFus' },
       { label: 'Source', href: 'https://github.com/Nocturna1Developer/FormulateAI' },
+    ],
+  },
+  {
+    name: 'The Disappearance',
+    video: { id: 'OprsYiEykEE', title: 'The Disappearance — full gameplay' },
+    context: 'Released first-person horror game · Unity, C#',
+    summary: 'A story-driven horror game with a finite-state enemy AI that patrols and hunts the player, plus an objective system driven by notes and subtitles.',
+    image: disappearance,
+    imageAlt: 'Title frame from the The Disappearance video.',
+    links: [
+      { label: 'Play', href: 'https://nocturna1.itch.io/the-dissapearance' },
+      { label: 'Source', href: 'https://github.com/Nocturna1Developer/Unity3D-Dissapearance' },
+    ],
+  },
+  {
+    name: 'Gustify',
+    video: { id: '_mPmjLOjb8U', title: 'Gustify — weather app demo' },
+    context: 'iOS weather app · Swift, MVVM',
+    summary: 'A location-aware weather app built on the OpenWeatherMap and Core Location APIs with an MVVM architecture and Fastlane tooling.',
+    image: gustify,
+    imageAlt: 'Title frame from the Gustify video.',
+    links: [
+      { label: 'Source', href: 'https://github.com/Nocturna1Developer/Gustify' },
+    ],
+  },
+  {
+    name: 'The Ruins of Ishgar',
+    video: { id: 'kP7kunFiuAQ', title: 'The Ruins of Ishgar — full gameplay' },
+    context: 'Released 2.5D platformer · Unity, C#',
+    summary: 'An atmospheric platformer through an abandoned temple, with moving obstacles driven by sinusoidal oscillators and a score system.',
+    image: ishgar,
+    imageAlt: 'Title frame from the The Ruins of Ishgar video.',
+    links: [
+      { label: 'Play', href: 'https://nocturna1.itch.io/the-ruins-of-ishgar' },
+      { label: 'Source', href: 'https://github.com/Nocturna1Developer/Unity3D-Ruins-Of-Ishgar' },
+    ],
+  },
+  {
+    name: 'The Lost Legacy',
+    video: { id: '-L7wtfTd2Qw', title: 'The Lost Legacy — full gameplay' },
+    context: 'Released 2D action platformer · Unity, C#',
+    summary: 'A Celeste-inspired platformer with dash, double jump and slash combat, and an endless mode with randomly spawning coins, monsters and potions.',
+    image: lostLegacy,
+    imageAlt: 'Title frame from the The Lost Legacy video.',
+    links: [
+      { label: 'Play', href: 'https://nocturna1.itch.io/the-lost-legacy' },
+      { label: 'Source', href: 'https://github.com/Nocturna1Developer/Unity2D-The-Lost-Legacy' },
+    ],
+  },
+  {
+    name: 'Tank War',
+    video: { id: 'uCK1EcNBCS4', title: 'Tank War — Unreal Engine gameplay' },
+    context: 'Unreal Engine prototype · C++, Blueprints',
+    summary: 'A last-tank-standing prototype with pathfinding enemy AI, built with C++ and Blueprints using vector math and physics calculations.',
+    image: tankWar,
+    imageAlt: 'Title frame from the Tank War video.',
+    links: [
+      { label: 'Source', href: 'https://github.com/Nocturna1Developer/UnrealEngine4-TankWar-Game' },
+    ],
+  },
+];
+
+/** Every other project, grouped. Text-only so the drop-down stays light. */
+export const otherProjects: { group: string; items: { name: string; note: string; href: string }[] }[] = [
+  {
+    group: 'Games & interactive',
+    items: [
+      { name: 'Crystal Journey', note: 'Retro 2D platformer built in 48 hours for a game jam', href: 'https://github.com/Nocturna1Developer/Unity2D-Crystal-Journey' },
+      { name: 'Travels of a Hero', note: 'Experimental top-down RPG with melee, ranged and special attacks, enemy pathfinding and tunable stats', href: 'https://github.com/Nocturna1Developer/Unity3D-Travels-Of-A-Hero' },
+    ],
+  },
+  {
+    group: 'Self-driving car (Nanodegree)',
+    items: [
+      { name: 'Finding Lane Lines', note: 'Lane detection in images with Python and OpenCV', href: 'https://github.com/Nocturna1Developer/Self-Driving-Car-Finding-Lane-Lines' },
+      { name: 'Traffic Sign Classifier', note: 'Convolutional neural network trained on the German Traffic Sign Dataset', href: 'https://github.com/Nocturna1Developer/Self-Driving-Car-Traffic-Sign-Classifier' },
+      { name: 'Behavioral Cloning', note: 'Trained a car to drive a track autonomously from recorded laps', href: 'https://github.com/Nocturna1Developer/Self-Driving-Car-Behavioural-Cloning' },
+      { name: 'Extended Kalman Filter', note: 'C++ state estimation from noisy lidar and radar', href: 'https://github.com/Nocturna1Developer/Self-Driving-Car-Extended-Kalman-Filter' },
+      { name: 'Kidnapped Vehicle', note: '2D particle filter for localization in C++', href: 'https://github.com/Nocturna1Developer/Self-Driving-Car-Kidnapped-Vehicle' },
+      { name: 'PID Control', note: 'C++ controller that drives a car around a track', href: 'https://github.com/Nocturna1Developer/Self-Driving-Car-PID' },
+      { name: 'Highway Driving', note: 'C++ path planning through highway traffic using sensor fusion', href: 'https://github.com/Nocturna1Developer/Self-Driving-Car-Highway-Driving' },
+      { name: 'Capstone', note: 'Integrated system for stopping at red lights and controlling speed', href: 'https://github.com/Nocturna1Developer/Self-Driving-Car-Capstone' },
+    ],
+  },
+  {
+    group: 'Machine learning & data',
+    items: [
+      { name: 'Bike Rental Prediction', note: 'Neural network with gradient descent and backpropagation', href: 'https://github.com/Nocturna1Developer/ML-Bike-Rental-Data-Predtiction' },
+      { name: 'Dog Breed Classifier', note: 'Image classifier for dog breeds', href: 'https://github.com/Nocturna1Developer/ML-Dog-Breed-Classifier' },
+      { name: 'Face Generation', note: 'Generative network producing faces and handwritten digits', href: 'https://github.com/Nocturna1Developer/ML-Face-Generation' },
+      { name: 'Script Generation', note: 'Generated a new TV script from episode transcripts', href: 'https://github.com/Nocturna1Developer/ML-Script-Generation' },
+      { name: 'Quadcopter Control', note: 'Reinforcement learning for takeoff and landing', href: 'https://github.com/Nocturna1Developer/ML-Teaching-Quadcopter-How-To-Fly' },
+      { name: 'Sales Data Analysis', note: 'Answered business questions from real sales data', href: 'https://github.com/Nocturna1Developer/Kaggle-Sales-Data-Analysis' },
+      { name: 'Pokémon Data Analysis', note: 'Data analysis following data-science best practices', href: 'https://github.com/Nocturna1Developer/Pokemon-Data-Science' },
+    ],
+  },
+  {
+    group: 'Web & apps',
+    items: [
+      { name: 'The Estate', note: 'Real estate website built with Next.js', href: 'https://github.com/Nocturna1Developer/The-Estate-Website' },
+      { name: 'Productivity App', note: 'Timer and meditation app, an SJSU term project in Java with UML design docs', href: 'https://github.com/Nocturna1Developer/Productivity-App' },
+      { name: 'Mini Full-Stack Projects', note: 'Small JavaScript and React projects', href: 'https://github.com/Nocturna1Developer/Mini-Fullstack-Projects' },
+      { name: 'DSA Practice', note: 'Data structures and algorithms problems in Jupyter', href: 'https://github.com/Nocturna1Developer/DSA-Practice' },
     ],
   },
 ];
