@@ -29,7 +29,7 @@ export const person = {
 };
 
 export const hero = {
-  headline: 'I turn complex problems into working software, and help teams ship it.',
+  headline: 'Building real-time simulations, multiplayer systems and full-stack apps.',
   intro:
     'I’m a software engineer with a background in applied mathematics. Since 2018 I’ve built multiplayer training simulations, led small teams to launch, and taught full-stack development to students in three countries.',
   proof: [
