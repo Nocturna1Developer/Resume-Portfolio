@@ -1,5 +1,11 @@
 ---
 import { getImage } from 'astro:assets';
+
+/** Split a bullet into its outcome lead-in and the rest, for scannable bolding. */
+const lead = (pt: string) => {
+  const m = pt.match(/^(.+?(?: by \d[\d,.]*%)?)( by | through | with | using | to deliver )(.*)$/);
+  return m && m[1].length < 75 ? [m[1], m[2] + m[3]] : ['', pt];
+};
 import reelPoster from '../assets/reel-poster.jpg';
 import avatar from '../assets/avatar.jpg';
 import { Image } from 'astro:assets';
@@ -20,7 +26,7 @@ const nav = [
 ---
 <Base
   title={`${person.name} — Software Engineer`}
-  description="Chinamay Kasareddy is a software engineer who builds simulations, multiplayer systems and full-stack web apps, has led teams of 6–7 developers to MVP, and has taught full-stack development."
+  description="Chinamay Kasareddy is a software engineer with experience building simulations, multiplayer systems and full-stack web apps, leading teams of 6–7 developers to MVP, and teaching full-stack development."
 >
   <a class="skip-link" href="#main">Skip to content</a>
 
@@ -87,7 +93,7 @@ const nav = [
                 <p class="role__org">{r.org}</p>
               </div>
               <ul class="role__points">
-                {r.points.map((pt) => <li>{pt}</li>)}
+                {r.points.map((pt) => { const [b, rest] = lead(pt); return <li>{b && <strong>{b}</strong>}{rest}</li>; })}
               </ul>
             </li>
           ))}
@@ -206,8 +212,8 @@ const nav = [
       <div class="wrap contact__inner">
         <div data-reveal>
           <p class="eyebrow">Contact</p>
-          <h2 id="contact-title" class="contact__title">Have a problem worth solving? Let’s talk.</h2>
-          <p class="section__lede">To discuss a role, a project or a collaboration, LinkedIn is the best way to reach me.</p>
+          <h2 id="contact-title" class="contact__title">Let’s connect.</h2>
+          <p class="section__lede">The best way to reach me is on LinkedIn. My code and project videos are on GitHub and YouTube.</p>
         </div>
         <div class="contact__actions" data-reveal style="--i:1">
           <a class="btn btn--solid" href={person.links.linkedin} target="_blank" rel="noopener">Message me on LinkedIn<Icon name="external" /></a>
@@ -354,6 +360,7 @@ const nav = [
   .role__org { color: var(--ink-2); }
   .role__points { padding-left: 1.1rem; display: grid; gap: var(--s-1); color: var(--ink-2); font-size: 0.9375rem; }
   .role__points li::marker { color: var(--line-strong); }
+  .role__points strong { color: var(--ink); font-weight: 600; }
   @media (min-width: 64rem) {
     .role { grid-template-columns: 10rem minmax(0, 4fr) minmax(0, 7fr); gap: var(--s-6); align-items: baseline; }
   }
