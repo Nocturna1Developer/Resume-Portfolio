@@ -1,4 +1,4 @@
-// Regenerates the social card and PNG favicons in /public.
+// Regenerates the social sharing card in /public (favicons: scripts/make-portrait-icons.mjs).
 // Run: node scripts/make-brand-images.mjs
 import sharp from 'sharp';
 import { readFile } from 'node:fs/promises';
@@ -19,8 +19,4 @@ const og = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" vi
 
 await sharp(Buffer.from(og)).png().toFile(new URL('../public/og.png', import.meta.url).pathname.replace(/^\/(\w:)/, '$1'));
 
-const icon = await readFile(new URL('../public/favicon.svg', import.meta.url));
-const out = (n) => new URL(`../public/${n}`, import.meta.url).pathname.replace(/^\/(\w:)/, '$1');
-await sharp(icon, { density: 400 }).resize(32, 32).png().toFile(out('favicon-32.png'));
-await sharp(icon, { density: 400 }).resize(180, 180).flatten({ background: '#15171c' }).png().toFile(out('apple-touch-icon.png'));
 console.log('brand images written');

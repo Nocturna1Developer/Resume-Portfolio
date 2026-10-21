@@ -1,6 +1,8 @@
 ---
 import { getImage } from 'astro:assets';
 import reelPoster from '../assets/reel-poster.jpg';
+import avatar from '../assets/avatar.jpg';
+import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import Icon from '../components/Icon.astro';
@@ -25,7 +27,7 @@ const nav = [
   <header class="site-header">
     <div class="wrap site-header__inner">
       <a class="brand" href="#top">
-        <span class="brand__mark" aria-hidden="true">CK</span>
+        <Image src={avatar} alt="" width={64} height={64} class="brand__mark" loading="eager" />
         <span class="brand__name">{person.name}</span><span class="visually-hidden">, back to top</span>
       </a>
       <nav aria-label="Primary">
@@ -91,7 +93,7 @@ const nav = [
           ))}
         </ol>
         <details class="disclosure more-exp" data-reveal>
-          <summary>Independent ventures and earlier roles: Dusk Games Interactive, an Etsy digital-asset shop, RippleMatch, APATICS</summary>
+          <summary>Independent ventures and earlier roles <span class="summary__count">· Dusk Games Interactive, Etsy shop, RippleMatch, APATICS</span></summary>
           <ol role="list" class="roles roles--compact">
             {moreExperience.map((r) => (
               <li class="role">
@@ -124,7 +126,7 @@ const nav = [
         </div>
 
         <details class="disclosure more" data-reveal>
-          <summary>More Work</summary>
+          <summary>More Work <span class="summary__count">· every other project</span></summary>
           <ul role="list" class="more__list">
             {moreWork.map((m) => (
               <li class="more__item">
@@ -246,8 +248,8 @@ const nav = [
   .site-header__inner { display: flex; align-items: center; justify-content: space-between; gap: var(--s-4); height: var(--header-h); }
   .brand { display: inline-flex; align-items: center; gap: var(--s-3); text-decoration: none; font-weight: 600; letter-spacing: -0.01em; min-height: 44px; }
   .brand__mark {
-    display: grid; place-items: center; width: 2rem; height: 2rem; border-radius: 50%;
-    background: var(--ink); color: var(--paper); font-family: var(--font-serif); font-size: 1rem; font-weight: 400; letter-spacing: 0.02em;
+    width: 2.25rem; height: 2.25rem; border-radius: 50%; object-fit: cover;
+    box-shadow: 0 0 0 1px var(--line-strong);
   }
   .nav { display: flex; align-items: center; gap: var(--s-1); margin: 0; }
   .nav a {
@@ -266,7 +268,7 @@ const nav = [
     .nav .nav__cta { padding: 0 var(--s-3); margin-left: var(--s-1); }
   }
   @media (max-width: 30rem) {
-    .brand__mark { width: 1.75rem; height: 1.75rem; font-size: 0.875rem; }
+    .brand__mark { width: 2rem; height: 2rem; }
     .nav a { padding: 0 7px; font-size: 0.8125rem; }
     .nav .nav__cta { padding: 0 var(--s-3); }
     .hero { padding-block: var(--s-6); gap: var(--s-5); }
@@ -340,6 +342,9 @@ const nav = [
   .others__note { font-size: var(--step--1); color: var(--ink-3); margin-top: -6px; }
   @media (min-width: 48rem) { .others { grid-template-columns: repeat(2, 1fr); column-gap: var(--s-7); } }
   @media (min-width: 64rem) { .others { grid-template-columns: repeat(4, 1fr); } }
+
+  .summary__count { font-weight: 400; color: var(--ink-3); }
+  @media (max-width: 47.99rem) { .summary__count { display: none; } }
 
   /* experience */
   .roles { margin: 0; border-top: 1px solid var(--ink); }
