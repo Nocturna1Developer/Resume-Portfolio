@@ -4,6 +4,8 @@
  */
 import type { ImageMetadata } from 'astro';
 import evCover from '../assets/projects/ev-cover.jpg';
+import fvPoster from '../assets/projects/futureview-poster.jpg';
+import sgscBadge from '../assets/sgsc-2025-finalist.png';
 import evShot1 from '../assets/projects/ev-shot1.jpg';
 import evShot2 from '../assets/projects/ev-shot2.jpg';
 import hyperion from '../assets/projects/hyperion.jpg';
@@ -36,10 +38,11 @@ export const hero = {
     { label: 'Now', value: 'Simulation Architect, ACSILabs' },
     { label: 'Leadership', value: 'Led teams of 6–7 developers to MVP' },
     { label: 'Education', value: 'B.S. Applied Computational Mathematics, SJSU' },
+    { label: 'Recognition', value: 'Serious Games Showcase & Challenge 2025 Finalist' },
   ],
 };
 
-export type Link = { label: string; href: string; kind: 'source' | 'live' | 'video' | 'play' };
+export type Link = { label: string; href: string; kind: 'source' | 'live' | 'video' | 'play' | 'post' };
 export type Video = { id: string; title: string; poster: ImageMetadata };
 
 export type Project = {
@@ -55,6 +58,9 @@ export type Project = {
   image: ImageMetadata;
   imageAlt: string;
   video?: Video;
+  /** Self-hosted MP4 in public/, shown instead of a YouTube embed. */
+  localVideo?: { src: string; poster: ImageMetadata; title: string };
+  award?: { label: string; image: ImageMetadata };
   tech: string[];
   links: Link[];
   details?: { heading: string; body?: string; list?: string[] }[];
@@ -63,47 +69,39 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    slug: 'empty-vessel',
-    name: 'The Empty Vessel',
-    context: 'Released PC game · Independent project',
-    year: '2021',
-    status: 'Released',
+    slug: 'futureview',
+    name: 'FutureView: USMC Training Simulation',
+    context: 'Official U.S. Marine Corps training program · ACSILabs, Office of Naval Research contract',
+    year: '2023 – Present',
+    status: 'Ongoing',
     purpose:
-      'A story-driven, first-person survival shooter set in an abandoned city, built and released publicly on itch.io in about two months.',
+      'A production training platform built by ACSILabs for the U.S. Marine Corps under an Office of Naval Research contract. It puts Marines in realistic 3D scenarios, then measures their decisions so instructors can see how operational judgment develops.',
     role:
-      'Solo developer under my side studio, Dusk Games Interactive. I wrote the C# gameplay systems, including an objective system, finite-state enemy AI with patrol and attack behavior, and weapon handling. They’re decoupled with actions, delegates and events so the build could finish on schedule. I also designed the city and forest levels using free Unity Asset Store art.',
-    outcome: '17,000+ views, 1,500+ downloads and a 4.8 / 5 average rating across 580 reviews.',
-    outcomeNote: 'Self-reported figures from the itch.io release.',
-    image: evCover,
-    imageAlt: 'Foggy abandoned village at the edge of a forest, with the title “The Empty Vessel” across the top.',
-    video: { id: 'i-WyRDsDctM', title: 'The Empty Vessel — full gameplay video', poster: evCover },
-    tech: ['C#', 'Unity', 'Event-driven architecture', 'Jira', 'Git'],
+      'As Simulation Architect on the ACSILabs team, I build and optimize the real-time multiplayer environment in Unity and C# with Tnet3 networking and Dissonance voice, streamlined server-access authentication, and author branching training scenarios in the platform’s no-code node editor, linking scenario logic, dialogue and scoring through web nodes.',
+    outcome: 'Improved server efficiency by 70% through optimized authentication queries; the platform now delivers training simulations for the Marine Corps and additional clients.',
+    outcomeNote: 'Team project; my contributions are listed above.',
+    image: fvPoster,
+    imageAlt: 'Marines in a 3D training scenario aboard a ship in the FutureView platform.',
+    localVideo: { src: 'media/futureview-usmc.mp4', poster: fvPoster, title: 'FutureView platform for the U.S. Marine Corps (6 min)' },
+    award: { label: 'Finalist, Serious Games Showcase & Challenge 2025', image: sgscBadge },
+    tech: ['Unity', 'C#', 'Tnet3', 'Dissonance', 'Multiplayer', 'No-code node editor'],
     links: [
-      { label: 'Play on itch.io', href: 'https://nocturna1.itch.io/the-empty-vessel', kind: 'play' },
-      { label: 'Source code', href: 'https://github.com/Nocturna1Developer/Unity3D-Empty-Vessel', kind: 'source' },
+      { label: 'View the LinkedIn post', href: 'https://www.linkedin.com/posts/liadibello_futureview-usmc-marinecorps-ugcPost-7462623349886595072-JK_n/', kind: 'post' },
     ],
     details: [
       {
-        heading: 'Scope',
-        body: 'Players return to life decades after a zombie outbreak, scavenge supplies and piece the story together from notes left by survivors. Controls include aiming, leaning, sprinting and reloading.',
-      },
-      {
-        heading: 'Constraints',
-        body: 'Built in roughly two months (February–March 2021) using only free third-party assets, so the engineering effort went into gameplay systems, pacing and polish rather than content creation.',
-      },
-      {
-        heading: 'Systems I programmed',
+        heading: 'What the platform does',
         list: [
-          'Objective system that drives the story through notes and goals',
-          'Finite-state enemy AI with patrol paths and an attack state',
-          'Weapon feel: leaning, weapon sway, bullet spread, recoil and reload animations',
-          'Level and lighting design for an abandoned city and forest, with post-processing for atmosphere',
+          'No-code node editor for authoring branching training scenarios',
+          'Intelligent agent system for in-scenario characters and dialogue',
+          'Real-time reporting of trainee performance and behavioral scores',
+          'Risk-free, low-cost environment for rehearsing complex decisions',
         ],
       },
-    ],
-    gallery: [
-      { src: evShot1, alt: 'In-game screenshot from The Empty Vessel.' },
-      { src: evShot2, alt: 'Second in-game screenshot from The Empty Vessel.' },
+      {
+        heading: 'Release',
+        body: 'Developed for the U.S. Marine Corps under Office of Naval Research contract N6833522C0650. The video was published by ACSILabs and is marked Distribution Statement A, approved for public release.',
+      },
     ],
   },
   {
@@ -175,6 +173,18 @@ export const projects: Project[] = [
 ];
 
 export const moreWork = [
+  {
+    name: 'The Empty Vessel',
+    video: { id: 'i-WyRDsDctM', title: 'The Empty Vessel — full gameplay' },
+    context: 'Released first-person survival shooter · Unity, C#',
+    summary: 'Built and released in about two months: objective system, finite-state enemy AI and weapon handling. 4.8/5 average across 580 reviews, 1,500+ downloads.',
+    image: evCover,
+    imageAlt: 'Title frame from The Empty Vessel.',
+    links: [
+      { label: 'Play', href: 'https://nocturna1.itch.io/the-empty-vessel' },
+      { label: 'Source', href: 'https://github.com/Nocturna1Developer/Unity3D-Empty-Vessel' },
+    ],
+  },
   {
     name: 'SlimeVenture',
     video: { id: 'r5-DEYGfWAA', title: 'SlimeVenture — gameplay trailer' },
@@ -421,6 +431,7 @@ export const about = {
     { school: 'California State University, East Bay', degree: 'B.S. Mathematics program', detail: 'GPA 3.8', dates: '2018 – 2020' },
   ],
   credentials: [
+    'Finalist, Serious Games Showcase & Challenge 2025 (FutureView)',
     'AWS Certified Solutions Architect – Associate',
     'Nanodegree: Self-Driving Car',
     'Nanodegree: Deep Learning',

@@ -1,5 +1,5 @@
 ---
-import { Picture } from 'astro:assets';
+import { Picture, getImage } from 'astro:assets';
 import type { Project } from '../data/content';
 import VideoEmbed from './VideoEmbed.astro';
 import Icon from './Icon.astro';
@@ -7,13 +7,20 @@ import Icon from './Icon.astro';
 interface Props { project: Project; feature?: boolean; index: number }
 const { project: p, feature = false, index } = Astro.props;
 const headingId = `project-${p.slug}`;
-const iconFor = { source: 'code', live: 'external', video: 'play', play: 'external' } as const;
+const iconFor = { source: 'code', live: 'external', video: 'play', play: 'external', post: 'external' } as const;
+const base = import.meta.env.BASE_URL.replace(/\/?$/, '/');
+const localPoster = p.localVideo ? await getImage({ src: p.localVideo.poster, width: 1280, format: 'webp' }) : null;
 const links = [...p.links];
 if (p.video) links.push({ label: 'Watch on YouTube', href: `https://www.youtube.com/watch?v=${p.video.id}`, kind: 'video' });
 ---
 <article class:list={['project', { 'project--feature': feature }]} aria-labelledby={headingId} data-reveal="group">
   <div class="project__media">
-    {p.video ? (
+    {p.localVideo && localPoster ? (
+      <video class="project__video" controls preload="none" playsinline poster={localPoster.src} width="1280" height="720" title={p.localVideo.title}>
+        <source src={`${base}${p.localVideo.src}`} type="video/mp4" />
+        <a href={`${base}${p.localVideo.src}`}>Download the video (MP4)</a>
+      </video>
+    ) : p.video ? (
       <VideoEmbed id={p.video.id} title={p.video.title} poster={feature ? p.video.poster : p.image} alt={p.imageAlt} eager={feature} sizes={feature ? '(min-width: 64rem) 40rem, 100vw' : '(min-width: 64rem) 34rem, 100vw'} />
     ) : (
       <Picture
@@ -36,6 +43,12 @@ if (p.video) links.push({ label: 'Watch on YouTube', href: `https://www.youtube.
       <span class="project__status">{p.status}</span>
     </p>
     <h3 id={headingId} class="project__title">{p.name}</h3>
+    {p.award && (
+      <p class="project__award">
+        <Picture src={p.award.image} alt="" widths={[96, 192]} sizes="48px" formats={['webp']} class="project__award-img" />
+        <strong>{p.award.label}</strong>
+      </p>
+    )}
     <p class="project__purpose">{p.purpose}</p>
 
     <dl class="project__facts">
@@ -89,6 +102,15 @@ if (p.video) links.push({ label: 'Watch on YouTube', href: `https://www.youtube.
 
 <style>
   .project__media { overflow: hidden; border-radius: var(--radius); }
+  .project__award {
+    display: inline-flex; align-items: center; gap: var(--s-3); justify-self: start;
+    padding: var(--s-1) var(--s-4) var(--s-1) var(--s-1);
+    border: 1px solid var(--line-strong); border-radius: 999px; background: var(--surface);
+    font-size: 0.875rem; color: var(--ink);
+  }
+  .project__award :global(img) { width: 2.75rem; height: 2.75rem; }
+  .project__award strong { font-weight: 600; }
+  .project__video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; background: #15171c; border-radius: var(--radius); }
   .project__media :global(picture img) { transition: transform 1200ms var(--ease-out); }
   .project:hover .project__media :global(picture img) { transform: scale(1.025); }
   .project { display: grid; gap: var(--s-5); align-content: start; }
