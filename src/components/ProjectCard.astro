@@ -16,9 +16,8 @@ if (p.video) links.push({ label: 'Watch on YouTube', href: `https://www.youtube.
 <article class:list={['project', { 'project--feature': feature }]} aria-labelledby={headingId} data-reveal="group">
   <div class="project__media">
     {p.localVideo && localPoster ? (
-      <video class="project__video" controls preload="none" playsinline poster={localPoster.src} width="1280" height="720" title={p.localVideo.title}>
+      <video class="project__video" controls controlslist="nodownload noremoteplayback" disablepictureinpicture oncontextmenu="return false" preload="none" playsinline poster={localPoster.src} width="1280" height="720" title={p.localVideo.title}>
         <source src={`${base}${p.localVideo.src}`} type="video/mp4" />
-        <a href={`${base}${p.localVideo.src}`}>Download the video (MP4)</a>
       </video>
     ) : p.video ? (
       <VideoEmbed id={p.video.id} title={p.video.title} poster={feature ? p.video.poster : p.image} alt={p.imageAlt} eager={feature} sizes={feature ? '(min-width: 64rem) 40rem, 100vw' : '(min-width: 64rem) 34rem, 100vw'} />

@@ -64,6 +64,9 @@ const nav = [
       <figure class="reel" data-enter style="--i:2">
         <video
           controls
+          controlslist="nodownload noremoteplayback"
+          disablepictureinpicture
+          oncontextmenu="return false"
           preload="none"
           playsinline
           poster={poster.src}
@@ -72,7 +75,6 @@ const nav = [
           aria-describedby="reel-caption"
         >
           <source src={`${base}media/showreel.mp4`} type="video/mp4" />
-          <a href={`${base}media/showreel.mp4`}>Download the showreel (MP4)</a>
         </video>
         <figcaption id="reel-caption"><strong>Showreel, 90 seconds.</strong> Web apps, computer vision, mobile apps and games in one cut. Sound on.</figcaption>
       </figure>

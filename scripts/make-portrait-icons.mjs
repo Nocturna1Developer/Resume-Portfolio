@@ -4,7 +4,7 @@ import sharp from 'sharp';
 
 const out = (p) => decodeURIComponent(new URL(p, import.meta.url).pathname).replace(/^\/(\w:)/, '$1');
 const src = out('../src/assets/portrait-source.png');
-const face = { left: 190, top: 60, width: 880, height: 880 }; // head-and-shoulders square
+const face = { left: 180, top: 20, width: 880, height: 880 }; // head-and-shoulders square
 
 const circle = (s) => Buffer.from(`<svg width="${s}" height="${s}"><circle cx="${s / 2}" cy="${s / 2}" r="${s / 2}"/></svg>`);
 const round = (s) => sharp(src).extract(face).resize(s, s).composite([{ input: circle(s), blend: 'dest-in' }]).png();
