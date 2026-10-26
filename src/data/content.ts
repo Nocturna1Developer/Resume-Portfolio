@@ -443,7 +443,7 @@ export const about = {
   capabilities: [
     { area: 'Real-time & simulation', evidence: 'Unity (C#, ECS/DOTS) multiplayer training simulations at ACSILabs; real-time market simulation and DOTS factory systems for Vultures (Steam) at Honor Games; games released on itch.io.', tools: 'C#, C++, Unity, Unreal Engine 5, Tnet3, Mirror, Photon' },
     { area: 'Web & backend', evidence: 'Hyperion’s Next.js + Supabase + Stripe stack; Node.js backend on AWS at Alter Learning; teaching React and SQL.', tools: 'TypeScript/JavaScript, React, Node.js, PostgreSQL, MySQL, MongoDB, AWS, Firebase' },
-    { area: 'Data & computer vision', evidence: 'Lane-detection pipeline and other Nanodegree projects; analytics processing at Alter Learning.', tools: 'Python, OpenCV, NumPy, Jupyter' },
+    { area: 'Data & computer vision', evidence: 'Lane-detection pipeline and other self-driving car and deep learning Nanodegree projects.', tools: 'Python, OpenCV, NumPy, Jupyter' },
     { area: 'Leading & teaching', evidence: 'Led teams of 6+ developers to MVP; taught six weekly courses across three countries.', tools: 'Agile delivery, Jira, Git, curriculum design' },
   ],
 };
