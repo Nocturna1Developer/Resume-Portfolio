@@ -3,8 +3,11 @@ import { getImage } from 'astro:assets';
 
 /** Split a bullet into its outcome lead-in and the rest, for scannable bolding. */
 const lead = (pt: string) => {
-  const m = pt.match(/^(.+?(?: by \d[\d,.]*%)?)( by | through | with | using | to deliver )(.*)$/);
-  return m && m[1].length < 75 ? [m[1], m[2] + m[3]] : ['', pt];
+  // Bold the opening clause, up to the first comma, colon, semicolon or connecting word.
+  const m = pt.match(/^(.{12,80}?)(?=, |: |; | by | through | with | using | so | to deliver | on a | in a | for )/);
+  if (m) return [m[1], pt.slice(m[1].length)];
+  const words = pt.split(' ');
+  return [words.slice(0, 5).join(' '), ' ' + words.slice(5).join(' ')];
 };
 import reelPoster from '../assets/reel-poster.jpg';
 import avatar from '../assets/avatar.jpg';
@@ -84,7 +87,7 @@ const nav = [
       <div class="wrap">
         <div class="section__head" data-reveal>
           <p class="eyebrow">Experience</p>
-          <h2 id="exp-title" class="section__title">Building, leading and teaching since 2018</h2>
+          <h2 id="exp-title" class="section__title">Building, leading and teaching since 2019</h2>
         </div>
         <ol role="list" class="roles">
           {experience.map((r, i) => (
