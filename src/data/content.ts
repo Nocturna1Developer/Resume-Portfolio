@@ -431,8 +431,8 @@ export const about = {
     'Outside of work I run a small independent label, Dusk Games Interactive, where I ship games end to end, and I enjoy game jams, badminton, reading and meditation.',
   ],
   education: [
-    { school: 'San José State University', degree: 'B.S. Applied Computational Mathematics', detail: 'Minors in Computer Science and Business Administration · GPA 3.8 · Magna Cum Laude, President’s Scholar', dates: '2020 – 2022' },
-    { school: 'California State University, East Bay', degree: 'B.S. Mathematics program', detail: 'GPA 3.8', dates: '2018 – 2020' },
+    { school: 'San José State University', degree: 'B.S. Applied Computational Mathematics', detail: 'Minors in Computer Science and Business Administration · GPA 3.86 · Magna Cum Laude, President’s Scholar', dates: '2020 – 2022' },
+    { school: 'California State University, East Bay', degree: 'B.S. Mathematics program', detail: 'GPA 3.82', dates: '2018 – 2020' },
   ],
   credentials: [
     'Finalist, Serious Games Showcase & Challenge 2025 (FutureView)',
