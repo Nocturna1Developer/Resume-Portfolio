@@ -72,7 +72,7 @@ export const projects: Project[] = [
     slug: 'futureview',
     name: 'FutureView: USMC Training Simulation',
     context: 'Official U.S. Marine Corps training program · ACSILabs, Office of Naval Research contract',
-    year: '2023 – Present',
+    year: 'Nov 2023 – Present',
     status: 'Ongoing',
     purpose:
       'A production training platform built by ACSILabs for the U.S. Marine Corps under an Office of Naval Research contract. It puts Marines in realistic 3D scenarios, then measures their decisions so instructors can see how operational judgment develops.',
@@ -332,7 +332,7 @@ export const experience: Role[] = [
   {
     title: 'Simulation Architect',
     org: 'ACSILabs Inc.',
-    dates: 'Sep 2023 – Present',
+    dates: 'Nov 2023 – Present',
     points: [
       'Built two 90-minute USMC training scenarios with 10,000+ decision points and branching storylines (one with 5 endings), turning SME requirements into scenario logic in a no-code node editor; used by 4 platoons (200 Marines) every few months',
       'Cut Docker restarts from 3–5 min to seconds (99% faster) and sped up database saves by removing 10,000s of redundant queries',
@@ -345,20 +345,9 @@ export const experience: Role[] = [
     tags: ['Delivery', 'Systems'],
   },
   {
-    title: 'Software Engineer (Contract)',
-    org: 'Honor Games',
-    dates: 'Mar 2023 – Jul 2023',
-    points: [
-      'Shipped Vultures, a factory tycoon on Steam, with a 4-person agile team: market sim, factory systems, contracts, leaderboards',
-      'Engineered a real-time market sim with math models for price surges, crashes, shortages, and breakdowns that vary each run',
-      'Raised frame rate 80% with thousands of conveyor items by rebuilding factory systems on Unity DOTS (ECS, C# Jobs, Burst)',
-    ],
-    tags: ['Collaboration', 'Simulation'],
-  },
-  {
     title: 'Lead Software Engineer (Contract)',
     org: 'Caution Ready Inc.',
-    dates: 'Jan 2023 – Jan 2024',
+    dates: 'Jan 2023 – Nov 2023',
     points: [
       'Led 6 developers via sprints, code reviews, and Git workflows to ship a 1-hour Frontier Planets Origins demo to Microsoft',
       'Directed AA-scale systems: enemy/companion AI, quests and dialogue, combat, boss fights, cutscenes, and a streamed open world',
@@ -368,9 +357,9 @@ export const experience: Role[] = [
     tags: ['Leadership', 'Architecture'],
   },
   {
-    title: 'Coding Instructor',
+    title: 'Full Stack Development Instructor',
     org: 'Coding Minds Academy',
-    dates: 'Jan 2023 – Mar 2024',
+    dates: 'May 2022 – Jan 2023',
     points: [
       'Taught 6 weekly one-on-one JavaScript, Unity, HTML, and CSS courses to middle schoolers in China, France, and the U.S.',
       'Raised student test scores 25% by tailoring each lesson plan to the student’s performance data',
@@ -379,9 +368,20 @@ export const experience: Role[] = [
     tags: ['Teaching'],
   },
   {
+    title: 'Software Engineer (Contract)',
+    org: 'Honor Games',
+    dates: 'Dec 2021 – May 2022',
+    points: [
+      'Shipped Vultures, a factory tycoon on Steam, with a 4-person agile team: market sim, factory systems, contracts, leaderboards',
+      'Engineered a real-time market sim with math models for price surges, crashes, shortages, and breakdowns that vary each run',
+      'Raised frame rate 80% with thousands of conveyor items by rebuilding factory systems on Unity DOTS (ECS, C# Jobs, Burst)',
+    ],
+    tags: ['Collaboration', 'Simulation'],
+  },
+  {
     title: 'Software Engineer & Board of Directors',
     org: 'Alter Learning Educational Platform Inc.',
-    dates: 'Aug 2019 – Jan 2023',
+    dates: 'Aug 2019 – Dec 2021',
     points: [
       'Led development of 6 educational games on a 40+ game subscription platform for PC/Mac, VR, and mobile',
       'Set the games’ educational and technical vision as a board director, leading a 7-member team that drew investor interest',
