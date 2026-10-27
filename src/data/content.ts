@@ -33,7 +33,7 @@ export const person = {
 export const hero = {
   headline: 'Building real-time simulations, multiplayer systems and full-stack apps.',
   intro:
-    'I’m a software engineer with a background in applied mathematics. Since 2019 I’ve built multiplayer training simulations, led small teams to launch, and taught full-stack development to students in three countries.',
+    'I am a Software engineer with 7+ years building real-time simulations, data-driven apps, and backend services. Led teams of 6+ developers to MVP launches and taught full-stack development in three countries.',
   proof: [
     { label: 'Now', value: 'Simulation Architect, ACSILabs' },
     { label: 'Leadership', value: 'Led teams of 6+ developers to MVP' },
