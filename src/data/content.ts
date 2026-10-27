@@ -363,7 +363,7 @@ export const experience: Role[] = [
     points: [
       'Taught 6 weekly one-on-one JavaScript, Unity, HTML, and CSS courses to middle schoolers in China, France, and the U.S.',
       'Raised student test scores 25% by tailoring each lesson plan to the student’s performance data',
-      'Earned 96% satisfaction from students and management with new React and SQL courses; built SimpleReads, a Flutter app',
+      'Earned 96% student and management satisfaction with new React/SQL courses; built a Flutter app other instructors use',
     ],
     tags: ['Teaching'],
   },
