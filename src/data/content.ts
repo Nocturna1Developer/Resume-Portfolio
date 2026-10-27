@@ -340,7 +340,7 @@ export const experience: Role[] = [
       'Cut platoon login from 20 to ~5 min (75% faster) so a full platoon logs in at once; also cut latency and frame drops',
       'Fixed a critical data-integrity bug that corrupted user records on sim load by adding safeguards for user data and accounts',
       'Scaled the platform to 3 more clients with reusable scenarios, AI agents, environments, and networking, auth, and reporting',
-      'Partner with senior USMC officers and SMEs on a regulated defense program, turning requirements into technical solutions',
+      'Collaborating with senior USMC officers and SMEs on a regulated defense program, turning requirements into technical solutions',
     ],
     tags: ['Delivery', 'Systems'],
   },
